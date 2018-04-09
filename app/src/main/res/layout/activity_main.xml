@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="8dp"
+    tools:context=".MainActivity">
+    <!--Scrollable enabler-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--Master Layout for ScrollView-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!--Intermittency Validation-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_above="@id/query"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignTop="@+id/query"
+                        android:layout_centerInParent="true"
+                        android:layout_marginBottom="-19dp"
+                        android:background="@drawable/ic_live_help_black_24dp"
+                        android:contentDescription="@string/starting_question_mark" />
+
+                    <TextView
+                        android:id="@+id/query"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="24dp"
+                        android:text="@string/intermittency_question"
+                        android:textSize="18sp" />
+                </RelativeLayout>
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/intermittentTrue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:onClick="onRadioButtonClick"
+                        android:text="@string/question_yes" />
+
+                    <RadioButton
+                        android:id="@+id/intermittentFalse"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:onClick="onRadioButtonClick"
+                        android:text="@string/question_no" />
+                </RadioGroup>
+            </LinearLayout>
+            <!--Router Validation-->
+            <LinearLayout
+                android:id="@+id/routerPresent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/router_present_question"
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <!--Modem Master Layout-->
+            <LinearLayout
+                android:id="@+id/modem_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/modem_lights"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/modempower"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/power"
+                            android:contentDescription="@string/modem_power_symbol" />
+
+                        <ImageView
+                            android:id="@+id/down"
+                            android:layout_width="wrap_content"
+                            android:layout_height="39dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/down"
+                            android:contentDescription="@string/downstream" />
+
+                        <ImageView
+                            android:id="@+id/up"
+                            android:layout_width="wrap_content"
+                            android:layout_height="39dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/up"
+                            android:contentDescription="@string/upstream" />
+
+                        <ImageView
+                            android:id="@+id/modemOnline"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/online"
+                            android:contentDescription="@string/online_symbol" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+
+                        <CheckBox
+                            android:id="@+id/modemPower"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="12dp"
+                            android:text="@string/modem_power" />
+
+                        <CheckBox
+                            android:id="@+id/modemSignal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="39dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="12dp"
+                            android:text="@string/modem_signal" />
+
+                        <CheckBox
+                            android:id="@+id/modemInternet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="12dp"
+                            android:text="@string/modem_internet" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/modemLightCheck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="12dp"
+                    android:onClick="onNextClick"
+                    android:text="@string/next"
+                    android:textAllCaps="true" />
+            </LinearLayout>
+            <!--Modem Reset Process-->
+            <!--Modem Power Out-->
+            <LinearLayout
+                android:id="@+id/modem_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
+                <!--observe modem-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/modem_reset_1"
+                    android:textSize="18sp" />
+                <!--check steps as completed-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/direction_2"
+                    android:textSize="18sp" />
+                <!--first and only check box-->
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/arrispowercord"
+                    android:contentDescription="@string/modem_power_plug"
+                    android:scaleType="centerInside" />
+
+                <CheckBox
+                    android:id="@+id/modemPowerOut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:onClick="onCheckboxClicked"
+                    android:text="@string/pwc_modem_1" />
+                <!--modem pwc out timer-->
+                <TextView
+                    android:id="@+id/mTextField3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp" />
+                <!--Modem Power In-->
+                <LinearLayout
+                    android:id="@+id/modem_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <CheckBox
+                        android:id="@+id/modemPowerIn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="onCheckboxClicked"
+                        android:text="@string/modem_replace_power" />
+
+                    <TextView
+                        android:id="@+id/mTextField4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </LinearLayout>
+            <!--Modem Light Verification-->
+            <LinearLayout
+                android:id="@+id/modem_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/missing_modem_lights"
+                    android:textSize="18sp" />
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+                    <!--Modem Result Selection Buttons-->
+                    <RadioButton
+                        android:id="@+id/modemOk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="onRadioButtonClick"
+                        android:text="@string/question_yes" />
+
+                    <RadioButton
+                        android:id="@+id/modemBad"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="onRadioButtonClick"
+                        android:text="@string/question_no" />
+                </RadioGroup>
+            </LinearLayout>
+            <!--Router Master Layout-->
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/router_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="12dp"
+                        android:background="@drawable/wifi"
+                        android:contentDescription="@string/wifi_lights" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:gravity="center"
+                        android:text="@string/router_light_question"
+                        android:textSize="18sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <CheckBox
+                            android:id="@+id/routerPower"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/router_power" />
+
+                        <CheckBox
+                            android:id="@+id/routerInternet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/router_internet" />
+
+                        <CheckBox
+                            android:id="@+id/routerWifi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/router_wifi" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/routerLightCheck"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="12dp"
+                        android:onClick="onNextClick"
+                        android:text="@string/next"
+                        android:textAllCaps="true" />
+
+                </LinearLayout>
+                <!--Router Reset Process-->
+                <LinearLayout
+                    android:id="@+id/router_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+                    <!--router pwc out-->
+                    <!--observe the lights-->
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="12dp"
+                        android:background="@drawable/routerpower"
+                        android:contentDescription="@string/router_power_plug" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/router_reset_1"
+                        android:textSize="18sp" />
+                    <!--check the boxes-->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/direction_2"
+                        android:textSize="18sp" />
+
+                    <CheckBox
+                        android:id="@+id/routerPowerOut"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="12dp"
+                        android:onClick="onCheckboxClicked"
+                        android:text="@string/remove_router_power" />
+
+                    <TextView
+                        android:id="@+id/mTextField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:textSize="20sp" />
+
+                    <LinearLayout
+                        android:id="@+id/router_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <CheckBox
+                            android:id="@+id/routerPowerIn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="12dp"
+                            android:onClick="onCheckboxClicked"
+                            android:text="@string/insert_router_power" />
+
+                        <TextView
+                            android:id="@+id/mTextField2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="12dp"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/router_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:gravity="center"
+                        android:text="@string/lights_return"
+                        android:textSize="18sp" />
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/routerOk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="onRadioButtonClick"
+                            android:text="@string/question_yes" />
+
+                        <RadioButton
+                            android:id="@+id/routerBad"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="onRadioButtonClick"
+                            android:text="@string/question_no" />
+                    </RadioGroup>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--ResultPage-->
+            <!--resultSelector()-->
+            <LinearLayout
+                android:id="@+id/results"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="388dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/question"
+                    android:contentDescription="@string/question_mark" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center"
+                    android:text="@string/can_u_connect"
+                    android:textSize="18sp" />
+
+                <RadioGroup
+                    android:id="@+id/connectionStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/connectionOk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="onRadioButtonClick"
+                        android:text="@string/question_yes" />
+
+                    <RadioButton
+                        android:id="@+id/connectionBad"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="onRadioButtonClick"
+                        android:text="@string/question_no" />
+
+                    <RadioButton
+                        android:id="@+id/connectionNone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone" />
+
+                </RadioGroup>
+
+                <LinearLayout
+                    android:id="@+id/finalResult"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="12dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/resultsFinal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/base_message"
+                        android:textSize="18sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_marginTop="12dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text= "@string/feedback_request"/>
+                    <EditText
+                        android:inputType="textMultiLine"
+                        android:id="@+id/feedbackbody"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/base_message"
+                        android:textSize="14sp"
+                        />
+                    <Button
+                        android:layout_gravity="center"
+                        android:layout_marginTop="12dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text = "@string/feedback"
+                        android:textAllCaps="true"
+                        android:onClick="feedback"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
